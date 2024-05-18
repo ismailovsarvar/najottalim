@@ -35,25 +35,25 @@ try:
         image varchar(150) NOT NULL, height INT NOT NULL, weight FLOAT NOT NULL,
         university varchar(150) NOT NULL)'''
 
-    # cur.execute(create_table_query)
-    # conn.commit()
-    # print("Table created successfully")
+    cur.execute(create_table_query)
+    conn.commit()
+    print("Table created successfully")
 
     insert_into_query = '''INSERT INTO users (firstName, lastName, maidenName, 
         age, gender, email, phone, username, password, birthDate, image, 
         height, weight, university) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
 
-    # users = r.json()['users']
-    #
-    # for user in users:
-    #     cur.execute(insert_into_query, (user['firstName'],
-    #                                     user['lastName'], user['maidenName'], user['age'],
-    #                                     user['gender'], user['email'],
-    #                                     user['phone'], user['username'],
-    #                                     user['password'], user['birthDate'],
-    #                                     user['image'], user['height'],
-    #                                     user['weight'], user['university']))
-    #     conn.commit()
+    users = r.json()['users']
+    
+    for user in users:
+        cur.execute(insert_into_query, (user['firstName'],
+                                        user['lastName'], user['maidenName'], user['age'],
+                                        user['gender'], user['email'],
+                                        user['phone'], user['username'],
+                                        user['password'], user['birthDate'],
+                                        user['image'], user['height'],
+                                        user['weight'], user['university']))
+        conn.commit()
     print("Data inserted successfully")
 except psycopg2.Error as e:
     print(e)
